@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.qqrecord.RecordActivity">
+
+    <RelativeLayout
+        android:id="@+id/layout_record"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <!--<TextView-->
+            <!--android:id="@+id/record_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="16sp"-->
+            <!--android:visibility="invisible" />-->
+
+        <!--<com.example.qqrecord.RecordButton-->
+            <!--android:id="@+id/btn_record"-->
+            <!--android:layout_width="55dp"-->
+            <!--android:layout_height="55dp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@mipmap/delete_img" />-->
+
+        <com.example.qqrecord.RecordLayout
+            android:id="@+id/record_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal">
+
+        </com.example.qqrecord.RecordLayout>
+
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:textColor="#303030"
+                android:gravity="center"
+                android:text="取消" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#cecece"/>
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:padding="10dp"
+                android:textColor="#303030"
+                android:gravity="center"
+                android:text="发送" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bottom_line"
+            android:layout_above="@id/bottom_layout"
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cecece"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

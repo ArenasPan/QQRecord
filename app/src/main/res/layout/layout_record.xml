@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_record_time"
+            android:text="time"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_left_voice"
+            android:layout_toLeftOf="@id/tv_record_time"
+            android:src="@mipmap/delete_img"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_right_voice"
+            android:layout_toRightOf="@id/tv_record_time"
+            android:src="@mipmap/delete_img"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="70dp"
+        android:layout_height="70dp">
+
+    <Button
+        android:id="@+id/btn_record"
+        android:background="@drawable/record_cancel"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+    <!--<com.example.qqrecord.RoundProgressBar-->
+        <!--android:id="@+id/progress_bar_round"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:background="@drawable/record_cancel"-->
+
+        <!--android_custom:roundColor="#D1D1D1"-->
+        <!--android_custom:roundProgressColor="@color/blue"-->
+        <!--android_custom:textColor="#9A32CD"-->
+        <!--android_custom:textIsDisplayable="false"-->
+        <!--android_custom:roundWidth="5dp"-->
+        <!--android_custom:textSize="18sp"/>-->
+        <com.example.qqrecord.MyRoundProcess
+            android:id="@+id/progress_bar_round"
+            android:background="@drawable/record_cancel"
+            android:visibility="gone"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+
+            app:roundColor="@android:color/darker_gray"
+            app:roundProgressColor="@android:color/holo_red_dark"
+            app:textSize="22sp"
+            app:textColor="@android:color/holo_blue_bright"/>
+    </FrameLayout>
+
+</LinearLayout>
