@@ -1,10 +1,9 @@
 package com.example.qqrecord;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +15,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private LinearLayout layoutRecord;
     private RelativeLayout allLayout;
+
+    private MediaPlayer mMediaPlayer;
+    private int duration;
+
+
+    private boolean isPlaying = false;
+
 
 
     @Override
@@ -33,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         allLayout.setOnClickListener(this);
         ivShowRecord.setOnClickListener(this);
         ivStartRecord.setOnClickListener(this);
+
     }
+
 
     @Override
     public void onClick(View view) {

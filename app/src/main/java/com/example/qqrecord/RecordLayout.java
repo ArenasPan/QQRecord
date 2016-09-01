@@ -23,9 +23,10 @@ import java.io.IOException;
  */
 public class RecordLayout extends LinearLayout {
 
-    private ImageView ivLeftVoice;
-    private ImageView ivRightVoice;
-    private TextView tvRecordTime;
+    //    private ImageView ivLeftVoice;
+//    private ImageView ivRightVoice;
+    private TextView tvPlayTime;
+    private RecordVoiceView voiceView;
     private Button btnRecord;
     private MyRoundProcess mProgressBar;
 
@@ -116,9 +117,10 @@ public class RecordLayout extends LinearLayout {
     private void init(Context context) {
         this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.layout_record, this, true);
-        ivLeftVoice = (ImageView) findViewById(R.id.iv_left_voice);
-        ivRightVoice = (ImageView) findViewById(R.id.iv_right_voice);
-        tvRecordTime = (TextView) findViewById(R.id.tv_record_time);
+//        ivLeftVoice = (ImageView) findViewById(R.id.iv_left_voice);
+//        ivRightVoice = (ImageView) findViewById(R.id.iv_right_voice);
+        tvPlayTime = (TextView) findViewById(R.id.tv_play_time);
+        voiceView = (RecordVoiceView) findViewById(R.id.voice_view);
         btnRecord = (Button) findViewById(R.id.btn_record);
         mProgressBar = (MyRoundProcess) findViewById(R.id.progress_bar_round);
         mProgressBar.setOnClickListener(new OnClickListener() {
@@ -166,8 +168,27 @@ public class RecordLayout extends LinearLayout {
 
     private synchronized void updateRecordStatus() {
         int time = (int) recodeTime;
-        tvRecordTime.setVisibility(VISIBLE);
-        tvRecordTime.setText(String.valueOf(time));
+
+        voiceView.setVisibility(VISIBLE);
+        voiceView.setText(String.valueOf(time));
+        setVoice();
+    }
+
+    // 录音Dialog图片随录音音量大小切换
+    private void setVoice() {
+        if (voiceValue < 8000.0) {
+            voiceView.setHeight(3);
+        } else if (voiceValue > 8000.0 && voiceValue < 14000.0) {
+            voiceView.setHeight(4);
+        } else if (voiceValue > 14000.0 && voiceValue < 20000.0) {
+            voiceView.setHeight(5);
+        } else if (voiceValue > 20000.0 && voiceValue < 26767.0) {
+            voiceView.setHeight(6);
+        } else if (voiceValue > 26767.0 && voiceValue < 32767.0) {
+            voiceView.setHeight(7);
+        } else if (voiceValue > 32767.0) {
+            voiceView.setHeight(8);
+        }
     }
 
     public interface RecordListener {
@@ -213,6 +234,10 @@ public class RecordLayout extends LinearLayout {
             }
             isCanceled = false;
             btnRecord.setText("点击播放");
+            voiceView.clearAnimation();
+            voiceView.setVisibility(GONE);
+            tvPlayTime.setVisibility(VISIBLE);
+            tvPlayTime.setText(String.valueOf((int)recodeTime));
         }
     }
 
@@ -240,8 +265,8 @@ public class RecordLayout extends LinearLayout {
                     btnRecord.setVisibility(VISIBLE);
                     mProgressBar.setVisibility(GONE);
                     mProgressBar.setProgress(0f);
-                    tvRecordTime.setVisibility(VISIBLE);
-                    tvRecordTime.setText(String.valueOf(time));
+                    tvPlayTime.setVisibility(VISIBLE);
+                    tvPlayTime.setText(String.valueOf(time));
                     playTime = 0;
                     btnRecord.setText("点击播放");
                 }
@@ -283,7 +308,7 @@ public class RecordLayout extends LinearLayout {
 
     private synchronized void updatePlayStatus() {
         int time = (int) playTime;
-        tvRecordTime.setText(String.valueOf(time));
+        tvPlayTime.setText(String.valueOf(time));
         float progress = playTime / recodeTime;
 //        Log.e("progress", String.valueOf(progress*100));
         mProgressBar.setProgress(progress*100);
@@ -295,8 +320,8 @@ public class RecordLayout extends LinearLayout {
         mPlayer.release();
         playThread.interrupt();
         int time = (int) recodeTime;
-        tvRecordTime.setVisibility(VISIBLE);
-        tvRecordTime.setText(String.valueOf(time));
+        tvPlayTime.setVisibility(VISIBLE);
+        tvPlayTime.setText(String.valueOf(time));
         playTime = 0.0f;
         btnRecord.setText("点击播放");
         btnRecord.setVisibility(VISIBLE);

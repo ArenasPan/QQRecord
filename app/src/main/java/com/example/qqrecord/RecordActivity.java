@@ -172,7 +172,7 @@ public class RecordActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        clearRecord();
+        clearRecord();
     }
 
     private void clearRecord(){
