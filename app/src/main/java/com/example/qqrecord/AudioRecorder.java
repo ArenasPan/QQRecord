@@ -5,6 +5,8 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
 
+import com.example.mylibrary.MP3Recorder;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -12,7 +14,8 @@ import java.util.Date;
 
 public class AudioRecorder implements RecordStrategy {
 
-    private MediaRecorder recorder;
+    //    private MediaRecorder recorder;
+    private MP3Recorder recorder;
     private String fileName;
     private String fileFolder = Environment.getExternalStorageDirectory()
             .getPath() + "/TestRecord";
@@ -30,12 +33,13 @@ public class AudioRecorder implements RecordStrategy {
         }
 //        fileName = getCurrentDate();
         fileName = "jz100Record";
-        recorder = new MediaRecorder();
-        recorder.setOutputFile(fileFolder + "/" + fileName + ".mp4");
-        Log.i("outputFile", fileFolder + "/" + fileName + ".mp4");
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 设置MediaRecorder的音频源为麦克风
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);// 设置MediaRecorder录制的音频格式
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);// 设置MediaRecorder录制音频的编码为MP4
+        recorder = new MP3Recorder(new File(fileFolder + "/" + fileName + ".mp3"));
+//        recorder = new MediaRecorder();
+//        recorder.setOutputFile(fileFolder + "/" + fileName + ".mp4");
+//        Log.i("outputFile", fileFolder + "/" + fileName + ".mp4");
+//        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 设置MediaRecorder的音频源为麦克风
+//        recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);// 设置MediaRecorder录制的音频格式
+//        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);// 设置MediaRecorder录制音频的编码为MP4
 //        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);// 设置MediaRecorder录制音频的编码为amr
     }
 
@@ -52,7 +56,7 @@ public class AudioRecorder implements RecordStrategy {
         // TODO Auto-generated method stub
         if (!isRecording) {
             try {
-                recorder.prepare();
+//                recorder.prepare();
                 recorder.start();
             } catch (IllegalStateException e) {
                 // TODO Auto-generated catch block
@@ -72,7 +76,7 @@ public class AudioRecorder implements RecordStrategy {
         // TODO Auto-generated method stub
         if (isRecording) {
             recorder.stop();
-            recorder.release();
+//            recorder.release();
             isRecording = false;
         }
 
@@ -81,7 +85,7 @@ public class AudioRecorder implements RecordStrategy {
     @Override
     public void deleteOldFile() {
         // TODO Auto-generated method stub
-        File file = new File(fileFolder + "/" + fileName + ".mp4");
+        File file = new File(fileFolder + "/" + fileName + ".mp3");
         file.deleteOnExit();
     }
 
@@ -91,13 +95,13 @@ public class AudioRecorder implements RecordStrategy {
         if (!isRecording) {
             return 0;
         }
-        return recorder.getMaxAmplitude();
+        return recorder.getRealVolume();
     }
 
     @Override
     public String getFilePath() {
         // TODO Auto-generated method stub
-        return fileFolder + "/" + fileName + ".mp4";
+        return fileFolder + "/" + fileName + ".mp3";
     }
 
 //    @Override

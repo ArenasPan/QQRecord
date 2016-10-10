@@ -176,17 +176,18 @@ public class RecordLayout extends LinearLayout {
 
     // 录音Dialog图片随录音音量大小切换
     private void setVoice() {
-        if (voiceValue < 8000.0) {
+        Log.e("voiceValue", "音量大小: " + String.valueOf(voiceValue));
+        if (voiceValue < 800.0) {
             voiceView.setHeight(3);
-        } else if (voiceValue > 8000.0 && voiceValue < 14000.0) {
+        } else if (voiceValue > 800.0 && voiceValue < 1600.0) {
             voiceView.setHeight(4);
-        } else if (voiceValue > 14000.0 && voiceValue < 20000.0) {
+        } else if (voiceValue > 1600.0 && voiceValue < 2400.0) {
             voiceView.setHeight(5);
-        } else if (voiceValue > 20000.0 && voiceValue < 26767.0) {
+        } else if (voiceValue > 2400.0 && voiceValue < 3200.0) {
             voiceView.setHeight(6);
-        } else if (voiceValue > 26767.0 && voiceValue < 32767.0) {
+        } else if (voiceValue > 3200.0 && voiceValue < 4000.0) {
             voiceView.setHeight(7);
-        } else if (voiceValue > 32767.0) {
+        } else if (voiceValue > 4000.0) {
             voiceView.setHeight(8);
         }
     }
@@ -322,6 +323,7 @@ public class RecordLayout extends LinearLayout {
         int time = (int) recodeTime;
         tvPlayTime.setVisibility(VISIBLE);
         tvPlayTime.setText(String.valueOf(time));
+
         playTime = 0.0f;
         btnRecord.setText("点击播放");
         btnRecord.setVisibility(VISIBLE);
